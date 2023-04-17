@@ -25,4 +25,26 @@ export class CountriesService {
     //   tap( countries => console.log('Tap 2', countries)),
     // )
   }
+
+
+  searchCountry( termPais: string): Observable<Country[]> {
+    const url = `${ this.apiUrl }/name/${termPais}`;
+    return this.httpClient.get<Country[]>( url )
+    .pipe(
+      catchError( error => {
+        console.log(error);
+        return of([])
+      }))
+  }
+
+  searchRegion(termRegion: string): Observable<Country[]> {
+    const url = `${ this.apiUrl }/region/${termRegion}`;
+    return this.httpClient.get<Country[]>( url )
+    .pipe(
+      catchError( error => {
+        console.log(error);
+        return of([])
+      }))
+  }
+
 }
