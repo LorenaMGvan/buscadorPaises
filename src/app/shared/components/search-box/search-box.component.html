@@ -1,4 +1,6 @@
 <input
     type="text"
     [placeholder]="textSearch"
-    class="form-control"/>
+    class="form-control"
+    (keyup.enter)="emiteValor(txtSearchInput.value)"
+    #txtSearchInput/>

@@ -2,12 +2,15 @@
 <hr>
 <div class="row">
     <div class="col">
-        <shared-search-box textSearch="Esto es un placehole de capital"></shared-search-box>
+        <shared-search-box 
+        (onValue)="searchByCapital($event)"
+        textSearch="Esto es un placehole de capital"></shared-search-box>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        tabla de resultados
+        <hr>
+        <countries-table [paises]="countries"></countries-table>
     </div>
 </div>
