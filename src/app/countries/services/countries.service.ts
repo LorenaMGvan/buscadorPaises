@@ -8,7 +8,14 @@ export class CountriesService {
 
   private apiUrl: string = 'https://restcountries.com/v3.1';
 
-  constructor(private httpClient: HttpClient) { }
+  public cacheStore = {
+    byCapital:    { term: '', countries: [] }, 
+    byCountries:  { term: '', countries: [] }, 
+    byRegion:     { region: '', countries: [] },
+  }
+
+  constructor(private httpClient: HttpClient) {
+   }
 
   private getCountriesRequest(url: string): Observable<Country[]> {
     return this.httpClient.get<Country[]>(url)

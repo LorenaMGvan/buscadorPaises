@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Country } from '../../interfaces/country';
 import { CountriesService } from '../../services/countries.service';
 
-type Region = 'Africa'|'Americas'|'Asia'|'Europe'|'Oceania';
+import { Country } from '../../interfaces/country';
+import { Region } from '../../interfaces/region.type';
+
+// type Region = 'Africa'|'Americas'|'Asia'|'Europe'|'Oceania';
 // uso el type porque se que no va a expanderse, a diferencia de las interfaces
 @Component({
   selector: 'app-by-region-page',
