@@ -1,6 +1,7 @@
+<!-- (keyup.enter)="emiteValor(txtSearchInput.value)"  lo comentamos para que funcione el debounce -->
 <input
     type="text"
     [placeholder]="textSearch"
+    (keyup)="onKeyPress(txtSearchInput.value)"
     class="form-control"
-    (keyup.enter)="emiteValor(txtSearchInput.value)"
     #txtSearchInput/>

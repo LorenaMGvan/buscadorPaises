@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'shared-search-box',
@@ -6,7 +7,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styles: [
   ]
 })
-export class SearchBoxComponent {
+export class SearchBoxComponent implements OnInit{
+
+  // esto es lo mismo que la linea de abajo
+  // private debounceX: Subject<string> = new Subject<string>(); 
+  // el subject es un tipo especial de observable
+  private debounceX = new Subject<string>;
 
   @Input()
   public textSearch: string = '';
@@ -14,7 +20,39 @@ export class SearchBoxComponent {
   @Output()
   public onValue = new EventEmitter<string>();
 
+  @Output()
+  public onDebounce = new EventEmitter<string>();
+
+  /*
+  El observable  debounce emite un valor
+  llega al pipe
+  el pipe tiene un operador debouceTime
+   EL debounce dice me tengo que esperar x tiempo para ver si no recibo mas valores
+   Si recibo otro valor, debo volver a esperar ux tiempo y no emito nada
+   Hasta que deje de emitir  ya mando valor
+  */
+
+   ngOnInit(): void {
+    this.debounceX
+    .pipe(
+      // primer argumento, cuanto tiempo queier esperar para hacer la siguiene emision
+      //  el segundo, cuando quiero ejecutar esa emision
+      debounceTime(300)
+    )
+    .subscribe( value => {
+      console.log('debouncevalue',value);
+      this.onDebounce.emit(value);
+    })
+  }
+
   emiteValor( value: string): void {
     this.onValue.emit( value );
   }
+  
+  onKeyPress(searchTerm: string) {
+    this.debounceX.next( searchTerm );
+    // delego el  console log, o lo que coloco en este onKeyORess  al debouncerX
+    // console.log('presionando', searchTerm);
+  }
+
 }

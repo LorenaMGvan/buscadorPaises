@@ -2,8 +2,10 @@
 <hr>
 <div class="row">
     <div class="col">
+        <!-- Y ano ocupamos el onValue porque usamos el onbounce  -->
+        <!-- (onValue)="searchByCapital($event)" -->
         <shared-search-box 
-        (onValue)="searchByCapital($event)"
+        (onDebounce)="searchByCapital($event)"
         textSearch="Esto es un placehole de capital"></shared-search-box>
     </div>
 </div>
