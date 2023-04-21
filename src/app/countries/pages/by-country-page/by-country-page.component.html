@@ -3,7 +3,8 @@
 <div class="row">
     <div class="col">
         <shared-search-box 
-        (onValue)="searchByPais($event)"
+        (onDebounce)="searchByPais($event)"
+        [initialValue]="initialValue"
         textSearch="Esto es un placehole de capital"></shared-search-box>
     </div>
 </div>
